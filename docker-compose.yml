@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+  first_filter:
+    build: ./demo-track
+    ports:
+      - 8080:8080
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
