@@ -1,10 +1,25 @@
 version: '3.8'
 
+networks:
+  main-network:
+    driver: bridge
+
 services:
   first_filter:
     build: ./demo-track
     ports:
       - 8080:8080
+    networks:
+      - main-network
+  third_filter:
+    build: ./python-kafka
+    environment:
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=29092
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
