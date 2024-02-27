@@ -2,10 +2,13 @@ package com.example.demotrack.controller;
 
 import com.example.demotrack.service.CountryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/countries")
@@ -25,14 +28,8 @@ public class CountryController {
 
 
     @GetMapping("/countries")
-    public String getAllCountries() throws JsonProcessingException {
-        // Invocar el servicio para obtener la lista de países
-        String countriesData = countryService.consumeExistingService();
+    public List<JsonNode> getAllCountries() throws JsonProcessingException {
 
-        // Filtrar y procesar los datos según sea necesario
-        // ...
-
-        // Devolver los datos procesados como respuesta
-        return countriesData;
+        return  countryService.consumeExistingService();
     }
 }

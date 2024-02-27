@@ -1,18 +1,21 @@
 version: '3.8'
 
-networks:
-  main-network:
-    driver: bridge
-
 services:
-  first_filter:
+  firstfilter:
     build: ./demo-track
     ports:
       - 8080:8080
-    networks:
-      - main-network
-  third_filter:
+  third-filter:
     build: ./python-kafka
+    environment:
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=29092
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
+  producer:
+    build: ./python-kafka-pro
     environment:
       - KAFKA_HOST=kafka
       - KAFKA_PORT=29092
@@ -44,7 +47,7 @@ services:
   mongo:
     image: mongo:7.0.5-jammy
     ports:
-      - 8081:8081
+      - 27017:27017
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example

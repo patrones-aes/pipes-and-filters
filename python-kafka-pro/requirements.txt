@@ -1,4 +1,4 @@
 Flask~=3.0.2
 flask_restful==0.3.10
 kafka-python == 2.0.2
-pymongo == 4.6.2
+requests == 2.30.0

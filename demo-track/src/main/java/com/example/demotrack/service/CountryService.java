@@ -23,7 +23,7 @@ public class CountryService {
         this.restTemplate = restTemplate;
     }
 
-    public String consumeExistingService() throws JsonProcessingException {
+    public List<JsonNode> consumeExistingService() throws JsonProcessingException {
         String existingServiceUrl = "https://restcountries.com/v3.1/all";
         //	"https://restcountries.com/v3.1/name/colombia"; // URL del servicio existente
 
@@ -49,7 +49,7 @@ public class CountryService {
 
         //return response;
         //return jsonArray.toString();
-        return registrosEnAmericas.toString();
+        return registrosEnAmericas;
     }
 
 }
